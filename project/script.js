@@ -70,8 +70,12 @@ function numToText() {
     // Retruns arrays containg each number represented as text
     function getStrings(numStrings) {
 
+        function reverseString(string) {
+            return [...string].reverse().join("")
+        }
+
         // Checks for existance of values that can not be constructed from other strings
-        function hasUnique(num) {
+        function checkUnique(num) {
             const check = Number(num.slice(-2));
             return stringsMap.get(1).get(`unique`).has(check);
         };
@@ -83,8 +87,12 @@ function numToText() {
             numStrings[i] = string.padStart(3, `0`);
         };
 
-        // console.log(numStrings, hasUnique(numStrings[0]))
+        // Gets strings for each indivdual number
+        for(const [i, string] of numStrings.entries()){
+            const hasUnique = checkUnique(string);
+        };
 
+        // console.log(numStrings, checkUnique(numStrings[0]))
     };
 
     const inputArray = uiElements.elInput.value.split(`,`);
