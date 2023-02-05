@@ -66,8 +66,14 @@ const stringsMap = new Map([
 
 // Gets user inputted number - Returns number represented as text
 function numToText() {
-    const inputArray = uiElements.elInput.value.split(`,`);
 
+    // Retruns arrays containg each number represented as text
+    function getStrings(numStrings) {
+
+    };
+
+    const inputArray = uiElements.elInput.value.split(`,`);
+    numberStrings = getStrings(inputArray);
 };
 
 // eventListners
