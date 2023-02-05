@@ -69,6 +69,12 @@ function numToText() {
 
     // Retruns arrays containg each number represented as text
     function getStrings(numStrings) {
+        const outStrings = [];
+
+        //Formatting - Adds padding to strings creating standard lengths
+        for(const [i, string] of numStrings.entries()){
+            numStrings[i] = string.paddingStart(3, `0`);
+        };
 
     };
 
