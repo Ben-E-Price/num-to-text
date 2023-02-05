@@ -5,6 +5,18 @@ const UiElements = {
     elInput: document.getElementById("user-input"),
     elBtnSub: document.getElementById("btn-convert"),
     elOutDis: document.getElementById("output-display"),
+
+    // Blocks conversion if no input is present
+    canConvert: function() {
+        const inputPresnet = UiElements.elInput.textContent.length;
+        
+        // Invoke numToText if content is present within input element
+        if(inputPresnet > 0){
+            numToText();
+        } else {
+            return
+        }
+    },
 };
 
 // Contains strings used to construct output - Organized by place values
@@ -44,10 +56,18 @@ const stringsMap = new Map([
         ])],
     ])],
 
-    [2, `hundred`]
+    [2, `hundred`],
 
     [3, new Map([
         [0, `thousand`],
         [1, `million`],
     ])]
 ]);
+
+// Passed user inputted number - Returns number represented as text
+function numToText() {
+
+};
+
+// eventListners
+UiElements.elBtnSub.addEventListener("click", UiElements.canConvert);
