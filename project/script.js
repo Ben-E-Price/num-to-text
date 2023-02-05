@@ -1,14 +1,14 @@
 "use strict"
 
 // Contains all UI elements
-const UiElements = {
+const uiElements = {
     elInput: document.getElementById("user-input"),
     elBtnSub: document.getElementById("btn-convert"),
     elOutDis: document.getElementById("output-display"),
 
     // Blocks conversion if no input is present
     canConvert: function() {
-        const inputPresnet = UiElements.elInput.textContent.length;
+        const inputPresnet = uiElements.elInput.value.length;
         
         // Invoke numToText if content is present within input element
         if(inputPresnet > 0){
@@ -64,10 +64,12 @@ const stringsMap = new Map([
     ])]
 ]);
 
-// Passed user inputted number - Returns number represented as text
+// Gets user inputted number - Returns number represented as text
 function numToText() {
+    const inputArray = uiElements.elInput.value.split(`,`);
 
+    console.log(inputArray);
 };
 
 // eventListners
-UiElements.elBtnSub.addEventListener("click", UiElements.canConvert);
+uiElements.elBtnSub.addEventListener("click", uiElements.canConvert);
