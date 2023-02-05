@@ -7,7 +7,7 @@ const uiElements = {
     elOutDis: document.getElementById("output-display"),
 
     // Blocks conversion if no input is present
-    canConvert: function() {
+    convertBlock: function() {
         const inputPresnet = uiElements.elInput.value.length;
         
         // Invoke numToText if content is present within input element
@@ -68,8 +68,7 @@ const stringsMap = new Map([
 function numToText() {
     const inputArray = uiElements.elInput.value.split(`,`);
 
-    console.log(inputArray);
 };
 
 // eventListners
-uiElements.elBtnSub.addEventListener("click", uiElements.canConvert);
+uiElements.elBtnSub.addEventListener("click", uiElements.convertBlock);
