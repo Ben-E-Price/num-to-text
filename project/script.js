@@ -19,32 +19,19 @@ const uiElements = {
     },
 };
 
+const placeValues = {
+    single: [`one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `nine`,],
+    tens: [`teen`, `twen`, `thir`, `four`, `fife`, `six`, `seven`, `eight`, `nine`,],
+};
+
 // Contains strings used to construct output - Organized by place values
 const stringsMap = new Map([
     //Single Values
-    [0, new Map([
-        [1, `one`],
-        [2, `two`],
-        [3, `three`],
-        [4, `four`],
-        [5, `five`],
-        [6, `six`],
-        [7, `seven`],
-        [8, `eight`],
-        [9, `nine`],
-    ])],
+    [0, new Map([])],
 
     // Tens values 
     [1, new Map([
-        [1, `teen`],
-        [2, `twenty`],
-        [3, `thirty`],
-        [4, `fourty`],
-        [5, `fifty`],
-        [6, `sixty`],
-        [7, `seventy`],
-        [8, `eighty`],
-        [9, `ninety`],
+        
 
         // Contains values that can not be constructed from other strings
         [`unique`, new Map([
