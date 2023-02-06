@@ -75,12 +75,12 @@ function numToText() {
 
         // Checks for existance of values that can not be constructed from other strings
         function checkUnique(num) {
-            const checkNum = Number(num.slice(-2));
-            const isUnique = stringsMap.get(1).get(`unique`).has(checkNum) ? true : false;
+            const uniqueNum = Number(num.slice(-2));
+            const isUnique = stringsMap.get(1).get(`unique`).has(uniqueNum) ? true : false;
             
             return {
                 isUnique,
-                checkNum,
+                uniqueNum,
             };
         };
 
@@ -116,14 +116,11 @@ function numToText() {
                 individualStrings.splice(0, 0, findString(i, char));
             };
 
-            // Retrives - inserts unique value strings, Removes 2 unrequired strings
+            // Retrives + inserts unique value strings, Removes 2 unrequired strings
             if(hasUnique.isUnique) {
-                console.log("test")
-                // const uniqueNum = reverseString(num).slice(-2);
-            }
+                individualStrings.splice(1, 2, findString(0, hasUnique.uniqueNum, hasUnique.isUnique));
+            };
         };
-
-        // console.log(numStrings, checkUnique(numStrings[0]))
     };
 
     const inputArray = uiElements.elInput.value.split(`,`);
