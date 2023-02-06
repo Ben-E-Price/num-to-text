@@ -21,17 +21,17 @@ const uiElements = {
 
 const placeValues = {
     single: [`one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `nine`,],
-    tens: [`teen`, `twen`, `thir`, `four`, `fife`, `six`, `seven`, `eight`, `nine`,],
+    tens: [`teen`, `twen`, `thir`, `four`, `fife`, `six`, `seven`, `eigh`, `nine`,],
 };
 
 // Contains strings used to construct output - Organized by place values
 const stringsMap = new Map([
     //Single Values
-    [0, new Map([])],
+    [0, new Map (constructMap(placeValues.single))],
 
     // Tens values 
     [1, new Map([
-        
+        ...constructMap(placeValues.tens, "ty"),
 
         // Contains values that can not be constructed from other strings
         [`unique`, new Map([
@@ -43,7 +43,7 @@ const stringsMap = new Map([
         ])],
     ])],
 
-    [2, `hundred`],
+    [2, new Map(constructMap(placeValues.single, ` hundred`))],
 
     [3, new Map([
         [0, `thousand`],
@@ -52,13 +52,14 @@ const stringsMap = new Map([
 ]);
 
 // Constructs mapObject from passed array propValues 
-function constructMap(propValues, commonString) {
+function constructMap(propValues, commonString = "") {
     const outMap = new Map();
-
-    for(const [i, value] of propValues.entries()){
-        outMap.set(i + 1, value.concat(commonString));
+    
+    for(let [i, value] of propValues.entries()){
+        value = commonString.length === 0 ? value: value.concat(commonString); 
+        outMap.set(i + 1, value);
     };
-
+    
     return outMap;
 };
 
@@ -89,11 +90,6 @@ function numToText() {
                 return stringsMap.get(1).get(`unique`).get(charNum)
             };
 
-            //Constructs hundreds strings
-            if(mapKey === 2 && charNum !== 0){
-                // return outString.concat
-            ;}
-
             return outString;
         };
 
@@ -105,14 +101,14 @@ function numToText() {
         };
 
         // Gets strings for each individual number
-        for(const [i, string] of numStrings.entries()){
+        for(let [i, string] of numStrings.entries()){
             const hasUnique = checkUnique(string);
             string = reverseString(string);
             const individualStrings = [];
 
             // For each char, get related string from map, insert into individualStrings
-            for(const [i, char] of string){
-
+            for(const [i, char] of [...string].entries()){
+                console.log(i, char, findString(i, char))
             };
 
         };
@@ -126,3 +122,4 @@ function numToText() {
 
 // eventListners
 uiElements.elBtnSub.addEventListener("click", uiElements.convertBlock);
+console.log(stringsMap)
