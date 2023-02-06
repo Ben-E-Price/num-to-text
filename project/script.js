@@ -51,6 +51,17 @@ const stringsMap = new Map([
     ])]
 ]);
 
+// Constructs mapObject from passed array propValues 
+function constructMap(propValues, commonString) {
+    const outMap = new Map();
+
+    for(const [i, value] of propValues.entries()){
+        outMap.set(i + 1, value.concat(commonString));
+    };
+
+    return outMap;
+};
+
 // Gets user inputted number - Returns number represented as text
 function numToText() {
 
