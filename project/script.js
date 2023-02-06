@@ -120,7 +120,12 @@ function numToText() {
             if(hasUnique.isUnique) {
                 individualStrings.splice(1, 2, findString(0, hasUnique.uniqueNum, hasUnique.isUnique));
             };
+
+            outStrings.push(individualStrings);
         };
+
+        return outStrings
+
     };
 
     const inputArray = uiElements.elInput.value.split(`,`);
