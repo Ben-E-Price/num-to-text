@@ -95,7 +95,7 @@ function numToText() {
                 return stringsMap.get(1).get(`unique`).get(charNum)
             };
 
-            return charNum === 0? "" : outString;
+            return outString;
         };
 
         const outStrings = [];
@@ -113,6 +113,8 @@ function numToText() {
 
             // For each char, get related string from map, insert into individualStrings
             for(const [i, char] of [...string].entries()){
+                if(char === "0") continue
+
                 individualStrings.splice(0, 0, findString(i, char));
             };
 
@@ -122,6 +124,7 @@ function numToText() {
             };
 
             outStrings.push(individualStrings);
+
         };
 
         return outStrings
