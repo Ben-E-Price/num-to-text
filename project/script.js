@@ -98,6 +98,22 @@ function numToText() {
             return outString;
         };
 
+        //Constructs final string - Combines input strings
+        function constructFinalString(inArray) {
+            
+            //Get large place value strings (millions, thousands)
+            if(inArray.length > 1){
+                const largePlace = inArray.slice(0, inArray.length - 1).reverse();
+                
+                for(let [i , placeArray] of largePlace.entries()){
+                    placeArray.push(findString(3, i));
+                };
+                
+                inArray = largePlace.reverse().concat([inArray.pop()]);
+            };
+
+        };
+
         const outStrings = [];
 
         // Formatting - Adds padding to strings creating standard lengths
@@ -124,10 +140,9 @@ function numToText() {
             };
 
             outStrings.push(individualStrings);
-
         };
 
-        return outStrings
+        return constructFinalString(outStrings);
 
     };
 
