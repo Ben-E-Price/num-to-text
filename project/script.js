@@ -108,7 +108,7 @@ function numToText() {
 
             // For each char, get related string from map, insert into individualStrings
             for(const [i, char] of [...string].entries()){
-                console.log(i, char, findString(i, char))
+                individualStrings.splice(0, 0, findString(i, char));
             };
 
         };
@@ -122,4 +122,3 @@ function numToText() {
 
 // eventListners
 uiElements.elBtnSub.addEventListener("click", uiElements.convertBlock);
-console.log(stringsMap)
