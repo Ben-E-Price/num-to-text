@@ -80,16 +80,43 @@ function numToText() {
             return stringsMap.get(1).get(`unique`).has(check);
         };
 
+        // Retrives string from stringsMap for charNum value
+        function findString(mapKey, charNum, isUnique) {
+            mapKey = Number(mapKey);
+            charNum = Number(charNum);
+            const outString = stringsMap.get(mapKey).get(charNum);
+
+            //Returns strings for unique numbers
+            if(isUnique) {
+                return stringsMap.get(1).get(`unique`).get(charNum)
+            };
+
+            //Constructs hundreds strings
+            if(mapKey === 2 && charNum !== 0){
+                // return outString.concat
+            ;}
+
+            return outString;
+        };
+
         const outStrings = [];
 
-        //Formatting - Adds padding to strings creating standard lengths
+        // Formatting - Adds padding to strings creating standard lengths
         for(const [i, string] of numStrings.entries()){
             numStrings[i] = string.padStart(3, `0`);
         };
 
-        // Gets strings for each indivdual number
+        // Gets strings for each individual number
         for(const [i, string] of numStrings.entries()){
             const hasUnique = checkUnique(string);
+            string = reverseString(string);
+            const individualStrings = [];
+
+            // For each char, get related string from map, insert into individualStrings
+            for(const [i, char] of string){
+
+            };
+
         };
 
         // console.log(numStrings, checkUnique(numStrings[0]))
