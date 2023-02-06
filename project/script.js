@@ -43,7 +43,7 @@ const stringsMap = new Map([
         ])],
     ])],
 
-    [2, new Map(constructMap(placeValues.single, ` hundred`))],
+    [2, new Map(constructMap(placeValues.single, ` hundred and`))],
 
     [3, new Map([
         [0, `thousand`],
@@ -95,7 +95,7 @@ function numToText() {
                 return stringsMap.get(1).get(`unique`).get(charNum)
             };
 
-            return outString;
+            return charNum === 0? "" : outString;
         };
 
         const outStrings = [];
