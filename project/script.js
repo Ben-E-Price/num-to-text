@@ -75,8 +75,13 @@ function numToText() {
 
         // Checks for existance of values that can not be constructed from other strings
         function checkUnique(num) {
-            const check = Number(num.slice(-2));
-            return stringsMap.get(1).get(`unique`).has(check);
+            const checkNum = Number(num.slice(-2));
+            const isUnique = stringsMap.get(1).get(`unique`).has(checkNum) ? true : false;
+            
+            return {
+                isUnique,
+                checkNum,
+            };
         };
 
         // Retrives string from stringsMap for charNum value
@@ -103,14 +108,19 @@ function numToText() {
         // Gets strings for each individual number
         for(let [i, string] of numStrings.entries()){
             const hasUnique = checkUnique(string);
-            string = reverseString(string);
             const individualStrings = [];
+            string = reverseString(string);
 
             // For each char, get related string from map, insert into individualStrings
             for(const [i, char] of [...string].entries()){
                 individualStrings.splice(0, 0, findString(i, char));
             };
 
+            // Retrives - inserts unique value strings, Removes 2 unrequired strings
+            if(hasUnique.isUnique) {
+                console.log("test")
+                // const uniqueNum = reverseString(num).slice(-2);
+            }
         };
 
         // console.log(numStrings, checkUnique(numStrings[0]))
