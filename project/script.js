@@ -39,6 +39,11 @@ const uiElements = {
 
     //Ensures clean standadised formatted inputs
     formatInput: function(event) {
+
+        // Removes unrequired characters - Returns length
+        function cleanInputLength(removeChar, string) {
+            return string.replaceAll(removeChar, "").length;
+        };
         
         //Prevent non-num chars from input
         function charBlock(event){
@@ -77,7 +82,7 @@ const uiElements = {
             
             //Inserts decimal charecter every 3rd poistion
             if(isDivisible(3, currentInValue) && currentInValue.length > 0){
-                eventEl.value = currentInValue.concat(deciChar)
+                eventEl.value = currentInValue.concat(deciChar);
             };
         };
 
