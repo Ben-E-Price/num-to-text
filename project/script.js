@@ -58,11 +58,10 @@ const uiElements = {
             };
 
             //Prevent event if char is illegal
-            if(checkLegal(event)){
-                return
-            } else {
+            if(!checkLegal(event)){
                 event.preventDefault();
             };
+        
         };
 
         charBlock(event);
