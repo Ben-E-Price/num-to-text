@@ -100,6 +100,7 @@ function numToText() {
 
         //Constructs final string - Combines input strings
         function constructFinalString(inArray) {
+            const fullStrings = [];
             
             //Get large place value strings (millions, thousands)
             if(inArray.length > 1){
@@ -111,6 +112,15 @@ function numToText() {
                 
                 inArray = largePlace.reverse().concat([inArray.pop()]);
             };
+
+            //Combines strings of each number - Converts first char to upper case - Push onto fullStrings
+            for(const strings of inArray) {
+                let joined = strings.join(" ");
+                joined = joined.replace(joined[0], joined[0].toUpperCase())
+                fullStrings.push(joined);  
+            };
+
+            return fullStrings
 
         };
 
