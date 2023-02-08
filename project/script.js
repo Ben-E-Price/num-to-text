@@ -36,6 +36,11 @@ const uiElements = {
             disWrapper.appendChild(createDisElement(string));
         };
     },
+
+    //Ensures clean standadised formatted inputs
+    formatInput: function(event) {
+        console.log(event)
+    },
 };
 
 const placeValues = {
@@ -181,3 +186,4 @@ function numToText() {
 
 // eventListners
 uiElements.elBtnSub.addEventListener("click", uiElements.convertBlock);
+uiElements.elInput.addEventListener("keydown", event => uiElements.formatInput(event));
