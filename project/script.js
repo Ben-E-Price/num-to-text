@@ -39,7 +39,33 @@ const uiElements = {
 
     //Ensures clean standadised formatted inputs
     formatInput: function(event) {
-        console.log(event)
+        
+        //Block chars
+        function charBlock(event){
+
+            //Checks charecter is legal
+            function checkLegal (checkEvent){
+                const legalChars = new RegExp(["[0-9]"]); //Legal char set
+
+                if(legalChars.test(checkEvent.key) ||
+                checkEvent.ctrlKey ||
+                checkEvent.altKey ||
+                checkEvent.key.length !== 1){
+                    return true
+                };
+
+                return false
+            };
+
+            //Prevent event if char is illegal
+            if(checkLegal(event)){
+                return
+            } else {
+                event.preventDefault();
+            };
+        };
+
+        charBlock(event);
     },
 };
 
