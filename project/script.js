@@ -17,6 +17,12 @@ const uiElements = {
             return
         }
     },
+
+    //Displays strings within the UI
+    displayStrings: function(numStrings) {
+        //Create p element - Add string content, insert onto dom
+
+    },
 };
 
 const placeValues = {
@@ -121,7 +127,6 @@ function numToText() {
             };
 
             return fullStrings
-
         };
 
         const outStrings = [];
@@ -156,8 +161,8 @@ function numToText() {
 
     };
 
-    const inputArray = uiElements.elInput.value.split(`,`);
-    const numberStrings = getStrings(inputArray);
+    // const inputArray = uiElements.elInput.value.split(`,`);
+    const numberStrings = getStrings(uiElements.elInput.value.split(`,`));
 };
 
 // eventListners
