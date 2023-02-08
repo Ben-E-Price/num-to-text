@@ -18,7 +18,7 @@ const uiElements = {
         }
     },
 
-    //Displays strings within the UI
+    //Creates/Appeneds elements to DOM 
     displayStrings: function(numStrings) {
         const disWrapper = document.getElementById("wrapper-display");
 
