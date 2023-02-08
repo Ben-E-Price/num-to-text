@@ -20,7 +20,6 @@ const uiElements = {
 
     //Displays strings within the UI
     displayStrings: function(numStrings) {
-        //Create p element - Add string content, insert onto dom
         const disWrapper = document.getElementById("wrapper-display");
 
         //Creates p element - Adds string to text content
@@ -32,6 +31,10 @@ const uiElements = {
             return newDisEl;
         };
 
+        //Created elements for each string - Append to disWrapper
+        for(const string of numStrings) {
+            disWrapper.appendChild(createDisElement(string));
+        };
     },
 };
 
