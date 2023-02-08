@@ -24,14 +24,14 @@ const uiElements = {
 
         //Creates p element - Adds string to text content
         function createDisElement(string) {
-            let newDisEl = createElement("p");
+            let newDisEl = document.createElement("p");
             newDisEl.setAttribute("id", "output-display");
             newDisEl.textContent = string;
 
             return newDisEl;
         };
 
-        //Created elements for each string - Append to disWrapper
+        //Create elements for each string - Append to disWrapper
         for(const string of numStrings) {
             disWrapper.appendChild(createDisElement(string));
         };
@@ -176,6 +176,7 @@ function numToText() {
 
     // const inputArray = uiElements.elInput.value.split(`,`);
     const numberStrings = getStrings(uiElements.elInput.value.split(`,`));
+    uiElements.displayStrings(numberStrings);
 };
 
 // eventListners
