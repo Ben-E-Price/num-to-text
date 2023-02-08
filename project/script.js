@@ -21,6 +21,16 @@ const uiElements = {
     //Displays strings within the UI
     displayStrings: function(numStrings) {
         //Create p element - Add string content, insert onto dom
+        const disWrapper = document.getElementById("wrapper-display");
+
+        //Creates p element - Adds string to text content
+        function createDisElement(string) {
+            let newDisEl = createElement("p");
+            newDisEl.setAttribute("id", "output-display");
+            newDisEl.textContent = string;
+
+            return newDisEl;
+        };
 
     },
 };
