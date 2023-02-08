@@ -65,17 +65,19 @@ const uiElements = {
 
         //Add decimal place into input string
         function checkDecimal(eventEl) {
+            const deciChar = ","
+            const currentInValue = eventEl.value;
 
             //Returns true when inputEl / divBy = 0
-            function isDivisible(divBy ,inputEl) {
-                const cleanInput = inputEl.value.replaceAll(",", "").length;
+            function isDivisible(divBy ,inputVal) {
+                const cleanInput = inputVal.replaceAll(deciChar, "").length;
                 const remainderVal = cleanInput % divBy;
                 return remainderVal === 0 ? true : false;
             };
             
             //Inserts decimal charecter every 3rd poistion
-            if(isDivisible(3, eventEl) && eventEl.value.length > 0){
-                eventEl.value = eventEl.value.concat(",")
+            if(isDivisible(3, currentInValue) && currentInValue.length > 0){
+                eventEl.value = currentInValue.concat(deciChar)
             };
         };
 
