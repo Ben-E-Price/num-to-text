@@ -40,7 +40,7 @@ const uiElements = {
     //Ensures clean standadised formatted inputs
     formatInput: function(event) {
         
-        //Block chars
+        //Prevent non-num chars from input
         function charBlock(event){
 
             //Checks charecter is legal
@@ -61,9 +61,25 @@ const uiElements = {
             if(!checkLegal(event)){
                 event.preventDefault();
             };
-        
         };
 
+        //Add decimal place into input string
+        function checkDecimal(eventEl) {
+
+            //Returns true when inputEl / divBy = 0
+            function isDivisible(divBy ,inputEl) {
+                const cleanInput = inputEl.value.replaceAll(",", "").length;
+                const remainderVal = cleanInput % divBy;
+                return remainderVal === 0 ? true : false;
+            };
+            
+            //Inserts decimal charecter every 3rd poistion
+            if(isDivisible(3, eventEl) && eventEl.value.length > 0){
+                eventEl.value = eventEl.value.concat(",")
+            };
+        };
+
+        checkDecimal(event.target);
         charBlock(event);
     },
 };
