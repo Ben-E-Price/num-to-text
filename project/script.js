@@ -39,23 +39,26 @@ const uiElements = {
 
     //Ensures clean standadised formatted inputs
     formatInput: function(event) {
+        const deciChar = ","
+        const currentEvent = event;
+        const currentInValue = currentEvent.target.value;
 
         // Removes unrequired characters - Returns length
-        function cleanInputLength(removeChar, string) {
-            return string.replaceAll(removeChar, "").length;
+        function cleanInputLength() {
+            return currentInValue.replaceAll(deciChar, "").length;
         };
         
         //Prevent non-num chars from input
-        function charBlock(event){
+        function charBlock(){
 
             //Checks charecter is legal
-            function checkLegal (checkEvent){
+            function checkLegal (){
                 const legalChars = new RegExp(["[0-9]"]); //Legal char set
 
-                if(legalChars.test(checkEvent.key) ||
-                checkEvent.ctrlKey ||
-                checkEvent.altKey ||
-                checkEvent.key.length !== 1){
+                if(legalChars.test(currentEvent.key) ||
+                currentEvent.ctrlKey ||
+                currentEvent.altKey ||
+                currentEvent.key.length !== 1){
                     return true
                 };
 
@@ -63,31 +66,42 @@ const uiElements = {
             };
 
             //Prevent event if char is illegal
-            if(!checkLegal(event)){
-                event.preventDefault();
+            if(!checkLegal()){
+                preventEvent();
             };
         };
 
         //Add decimal place into input string
-        function checkDecimal(eventEl) {
-            const deciChar = ","
-            const currentInValue = eventEl.value;
+        function checkDecimal() {
 
             //Returns true when inputEl / divBy = 0
-            function isDivisible(divBy ,inputVal) {
-                const cleanInput = inputVal.replaceAll(deciChar, "").length;
-                const remainderVal = cleanInput % divBy;
+            function isDivisible(divBy) {
+                const remainderVal = cleanInputLength() % divBy;
                 return remainderVal === 0 ? true : false;
             };
             
             //Inserts decimal charecter every 3rd poistion
-            if(isDivisible(3, currentInValue) && currentInValue.length > 0){
-                eventEl.value = currentInValue.concat(deciChar);
+            if(isDivisible(3) && currentInValue.length > 0){
+               currentEvent.target.value = currentInValue.concat(deciChar);
             };
         };
 
-        checkDecimal(event.target);
-        charBlock(event);
+        // Limits number of characters to limitNum value
+        function limitChars(limitNum){
+            return cleanInputLength() < limitNum ? true : preventEvent();
+        };
+
+        //Blocks currentEvents execution
+        function preventEvent() {
+            currentEvent.preventDefault();
+        };
+
+        //Checks number of characters < limit
+        if(limitChars(9)){
+            checkDecimal();
+            charBlock();
+        };
+
     },
 };
 
