@@ -58,17 +58,26 @@ const uiElements = {
                 if(legalChars.test(currentEvent.key) ||
                 currentEvent.ctrlKey ||
                 currentEvent.altKey ||
-                currentEvent.key.length !== 1){
+                currentEvent.key.length !== 1 ||
+                currentEvent.key === "Backspace"){
                     return true
                 };
 
                 return false
             };
 
-            //Prevent event if char is illegal
-            if(!checkLegal()){
-                preventEvent();
+            // Limits number of characters to limitNum value
+            function limitChars(limitNum){
+                return cleanInputLength() < limitNum ? true : false;
             };
+
+            //Prevent event if char is illegal
+            if(!checkLegal() || !limitChars(9)){
+                preventEvent();
+                return false
+            };
+
+            return true
         };
 
         //Add decimal place into input string
@@ -81,14 +90,9 @@ const uiElements = {
             };
             
             //Inserts decimal charecter every 3rd poistion
-            if(isDivisible(3) && currentInValue.length > 0){
+            if(isDivisible(3) && currentInValue.length > 0) {
                currentEvent.target.value = currentInValue.concat(deciChar);
             };
-        };
-
-        // Limits number of characters to limitNum value
-        function limitChars(limitNum){
-            return cleanInputLength() < limitNum ? true : preventEvent();
         };
 
         //Blocks currentEvents execution
@@ -96,10 +100,9 @@ const uiElements = {
             currentEvent.preventDefault();
         };
 
-        //Checks number of characters < limit
-        if(limitChars(9)){
-            checkDecimal();
-            charBlock();
+        //Checks input is < limit + legal character
+        if(charBlock()){
+            checkDecimal();    
         };
 
     },
