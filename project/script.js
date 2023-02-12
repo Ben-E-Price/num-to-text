@@ -67,6 +67,7 @@ const uiElements = {
 
             // Limits number of characters to limitNum value
             function limitChars(limitNum){
+                if (currentEvent.key === "Backspace") return true
                 return cleanInputLength() < limitNum ? true : false;
             };
 
@@ -100,7 +101,6 @@ const uiElements = {
             currentEvent.preventDefault();
         };
 
-        console.log(currentEvent)
         //Checks input is < limit + legal character
         if(charBlock()){
             checkDecimal();    
