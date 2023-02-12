@@ -53,13 +53,12 @@ const uiElements = {
 
             //Checks charecter is legal
             function checkLegal (){
-                const legalChars = new RegExp(["[0-9]"]); //Legal char set
+                const legalChars = new RegExp(["[0-9\b]"]); //Legal char set
 
                 if(legalChars.test(currentEvent.key) ||
                 currentEvent.ctrlKey ||
                 currentEvent.altKey ||
-                currentEvent.key.length !== 1 ||
-                currentEvent.key === "Backspace"){
+                currentEvent.key.length !== 1){
                     return true
                 };
 
@@ -91,7 +90,8 @@ const uiElements = {
             
             //Inserts decimal charecter every 3rd poistion
             if(isDivisible(3) && currentInValue.length > 0) {
-               currentEvent.target.value = currentInValue.concat(deciChar);
+                if(currentEvent.key === "Backspace") return
+                currentEvent.target.value = currentInValue.concat(deciChar);
             };
         };
 
@@ -100,6 +100,7 @@ const uiElements = {
             currentEvent.preventDefault();
         };
 
+        console.log(currentEvent)
         //Checks input is < limit + legal character
         if(charBlock()){
             checkDecimal();    
