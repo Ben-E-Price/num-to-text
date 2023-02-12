@@ -89,8 +89,19 @@ const uiElements = {
                 return remainderVal === 0 ? true : false;
             };
             
+            //Allows or Prevents decimals being added - If currentInValue = deciChar block - Prevents multiple deciChar on char removal 
+            function allowDeciCheck() {
+                const checkPos = currentInValue.slice(currentInValue.length - 1);
+                
+                if(checkPos === deciChar){
+                    return false
+                };
+
+                return true
+            };
+
             //Inserts decimal charecter every 3rd poistion
-            if(isDivisible(3) && currentInValue.length > 0) {
+            if(isDivisible(3) && currentInValue.length > 0 && allowDeciCheck()) {
                 if(currentEvent.key === "Backspace") return
                 currentEvent.target.value = currentInValue.concat(deciChar);
             };
