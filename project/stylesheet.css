@@ -8,9 +8,23 @@ html{
     background-image: linear-gradient(45deg, orange, rgb(245, 201, 121));
 }
 
+.wrapper{
+    margin: 15px 0px;
+}
+
 #wrapper-ui {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 50px;
+}
+
+#user-input{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px black solid;
+}
+
+#user-input:focus{
+    outline: none;
 }
