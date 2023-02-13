@@ -40,6 +40,7 @@ html{
 }
 
 #user-input:focus{
+    transition: ease 2s;
     outline: none;
     border-image-source: linear-gradient(90deg, black 60%, transparent);
 }
@@ -47,14 +48,17 @@ html{
 #btn-convert{
     background-color: transparent;
     border: 1px solid black;
-
-    border-image-slice: 1;
-    border-image-source: linear-gradient(90deg,black, transparent 50%);
+    border-radius: 10px;
 
     width: var(--el-width);
-    height: var(--el-height); 
+    height: var(--el-height);
+    
+    transition-delay: 0.1s;
+    transition: ease 500ms;
 }
 
 #btn-convert:hover{
-    border-image-source: linear-gradient(90deg,black 100%, transparent);
+    transition-delay: 0.1s;
+    transition: ease 500ms;
+    border-radius: 20px;
 }
