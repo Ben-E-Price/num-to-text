@@ -6,14 +6,15 @@ const uiElements = {
     elBtnSub: document.getElementById("btn-convert"),
     elOutDis: document.getElementById("output-display"),
 
-    // Blocks conversion if no input is present
-    convertBlock: function() {
-        const inputPresnet = uiElements.elInput.value.length;
+    //Blocks numToText when no value within input
+    executeConversion: function() {
+        const inputLength = uiElements.elInput.value.length;
         
         // Invoke numToText if content is present within input element
-        if(inputPresnet > 0){
+        if(inputLength > 0){
             numToText();
         } else {
+            alert("Please enter a number")
             return
         }
     },
@@ -116,7 +117,6 @@ const uiElements = {
         if(charBlock()){
             checkDecimal();    
         };
-
     },
 };
 
@@ -262,5 +262,5 @@ function numToText() {
 };
 
 // eventListners
-uiElements.elBtnSub.addEventListener("click", uiElements.convertBlock);
+uiElements.elBtnSub.addEventListener("click", uiElements.executeConversion);
 uiElements.elInput.addEventListener("keydown", event => uiElements.formatInput(event));
