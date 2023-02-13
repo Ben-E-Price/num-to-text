@@ -1,3 +1,9 @@
 *{
     box-sizing: border-box;
 }
+
+#wrapper-ui {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
