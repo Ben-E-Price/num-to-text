@@ -30,23 +30,31 @@ html{
 #user-input{
     background-color: transparent;
     border: none;
+
     border-bottom: 1px black solid;
+    border-image-source: linear-gradient(90deg, black , transparent 60%);
+    border-image-slice: 1;
+
     width: var(--el-width);
     height: var(--el-height); 
 }
 
 #user-input:focus{
     outline: none;
+    border-image-source: linear-gradient(90deg, black 60%, transparent);
 }
 
 #btn-convert{
     background-color: transparent;
     border: 1px solid black;
-    border-radius: 10px;
+
+    border-image-slice: 1;
+    border-image-source: linear-gradient(90deg,black, transparent 50%);
+
     width: var(--el-width);
     height: var(--el-height); 
 }
 
 #btn-convert:hover{
-    background-color: rgba(255, 255, 255, 0.123);
+    border-image-source: linear-gradient(90deg,black 100%, transparent);
 }
