@@ -4,7 +4,19 @@
 const uiElements = {
     elInput: document.getElementById("user-input"),
     elBtnSub: document.getElementById("btn-convert"),
-    elOutDis: document.getElementById("output-display"),
+    elOutDis: document.getElementById("wrapper-display"),
+
+    //Removes text from UI
+    removeTextElements: function() {
+        const childList = this.elOutDis.childElementCount > 0 ? [...this.elOutDis.children] : false
+
+        if(childList === false) return;
+
+        //Remove elements
+        for(const child of childList) {
+            child.remove();
+        };
+    },
 
     //Blocks numToText when no value within input
     executeConversion: function() {
@@ -12,9 +24,10 @@ const uiElements = {
         
         // Invoke numToText if content is present within input element
         if(inputLength > 0){
+            uiElements.removeTextElements();
             numToText();
         } else {
-            alert("Please enter a number")
+            alert("Please enter a number");
             return
         }
     },
