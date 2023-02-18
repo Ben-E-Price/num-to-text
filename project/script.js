@@ -201,8 +201,7 @@ function constructNumMap(smallStrings, placeStrings) {
                 tensMap.set(indexKey, subString.concat(ty));
             } else if (!reuse) {
                 //Sets single use unique strings
-
-                tensMap.get("unique").set(key, subString.concat(teen));
+                tensMap.get("unique").set(key, subString);
             };
 
             //Accounts for + sets 20 string
