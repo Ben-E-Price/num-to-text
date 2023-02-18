@@ -162,6 +162,7 @@ const placeValueStrings = {
 //Construct and retruns fully constructed map containing strings
 function constructNumMap(smallStrings, placeStrings) {
     const [teen, ty, hun] = placeStrings.small;
+    const {values: placeValues, uniqueLetters: placeLetters} = placeStrings.large
 
     const numMap = new Map();
 
@@ -176,7 +177,7 @@ function constructNumMap(smallStrings, placeStrings) {
         };
     };
 
-    //Add strings into numMap
+    //Add smallStrings values into numMap - Adds single, tens, hundreds place values
     for(const [indexKey, stringArray] of smallStrings.entries()){
         const arrayLen = stringArray.length;
         const tensMap = numMap.get(2);
@@ -184,19 +185,18 @@ function constructNumMap(smallStrings, placeStrings) {
         numMap.get(1).set(indexKey, stringArray[0]); //Adds single place valves
         numMap.get(3).set(indexKey, stringArray[0].concat(hun)); //Adds hundred place values
 
-        //Sets ten place for common/reusable single strings
+        //Sets ten place for single re-useable strings
         if(arrayLen === 1) {
             tensMap.set(indexKey, stringArray[0].concat(ty));
         };
 
-        //Sets ten place for unique strings
+        //Sets ten place for mutiple/unique strings
         if(arrayLen === 2) {
             const subArray = stringArray[1];
             const [subString, key, reuse] = subArray;
 
             if(reuse) {
                 //Sets 13, 30 - 15, 50, strings
-
                 tensMap.get("unique").set(key, subString.concat(teen));
                 tensMap.set(indexKey, subString.concat(ty));
             } else if (!reuse) {
@@ -206,12 +206,32 @@ function constructNumMap(smallStrings, placeStrings) {
 
             //Accounts for + sets 20 string
             if(subArray.length > 3) {
-                tensMap.set(indexKey, subString.concat(ty));
+                tensMap.set(indexKey, subArray[3].concat(ty));
             };
         };
 
+
+
     };
 
+    //Adds strings for large place values, thousands > 
+    const placeMap = numMap.get(4);
+    for(const [placeString, reuse] of placeValues) {
+        let key = placeMap.size + 1;
+
+        if(reuse){
+            //Adds + constructs place values strings from letters
+            for(const letter of placeLetters) {
+                placeMap.set(key, letter.concat(placeString));
+                key ++;
+            };
+        } else {
+            //Adds unique place value strings
+            placeMap.set(key, placeString);
+        };
+    };
+
+    
     return numMap
 };
 
