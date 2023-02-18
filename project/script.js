@@ -150,7 +150,7 @@ const smallValueStrings = [
 // Contains place value strings required to construct 00 - 000,000,000,000 
 const placeValueStrings = {
     //Tens - hundreds place values
-    small: ["teen", "ty", "hundred"],
+    small: ["teen", "ty", " hundred"],
 
     //Thousands - Billions place values
     large: {
@@ -166,43 +166,57 @@ function constructNumMap(smallStrings, placeStrings) {
     const numMap = new Map();
 
     //Create 4 submaps within numMap
-    for(let i = 0; i < 3; i++){
+    for(let i = 0; i < 4; i++){
         const key = i + 1;
         numMap.set(key, new Map());
 
-        //Create submap "unique" within tens map
+        //Creates submap "unique" within tens map
         if(key === 2) {
             numMap.get(key).set("unique", new Map());
         };
     };
+
+    //Add strings into numMap
+    for(const [indexKey, stringArray] of smallStrings.entries()){
+        const arrayLen = stringArray.length;
+        const tensMap = numMap.get(2);
+
+        numMap.get(1).set(indexKey, stringArray[0]) //Adds single place valves
+        numMap.get(3).set(indexKey, stringArray[0].concat(hun)) //Adds hundred place values
+
+    }
+
+    return numMap
 }
 
+console.log(constructNumMap(smallValueStrings, placeValueStrings))
+
 // Contains strings used to construct output - Organized by place values
-const stringsMap = new Map([
-    //Single Values
-    [0, new Map (constructMap(placeValues.single))],
+// const stringsMap = new Map([
+//     //Single Values
+//     [0, new Map (constructMap(placeValues.single))],
 
-    // Tens values 
-    [1, new Map([
-        ...constructMap(placeValues.tens, "ty"),
+//     // Tens values 
+//     [1, new Map([
+//         ...constructMap(placeValues.tens, "ty"),
 
-        // Contains values that can not be constructed from other strings
-        [`unique`, new Map([
-            [10, `ten`],
-            [11, `eleven`],
-            [12, `twelve`],
-            [13, `thirteen`],
-            [15, `fifteen`],
-        ])],
-    ])],
+//         // Contains values that can not be constructed from other strings
+//         [`unique`, new Map([
+//             [10, `ten`],
+//             [11, `eleven`],
+//             [12, `twelve`],
+//             [13, `thirteen`],
+//             [15, `fifteen`],
+//         ])],
+//     ])],
 
-    [2, new Map(constructMap(placeValues.single, ` hundred and`))],
+//     [2, new Map(constructMap(placeValues.single, ` hundred and`))],
 
-    [3, new Map([
-        [0, `thousand`],
-        [1, `million`],
-    ])]
-]);
+//     [3, new Map([
+//         [0, `thousand`],
+//         [1, `million`],
+//     ])]
+// ]);
 
 // Constructs mapObject from passed array propValues 
 function constructMap(propValues, commonString = "") {
