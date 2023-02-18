@@ -181,13 +181,40 @@ function constructNumMap(smallStrings, placeStrings) {
         const arrayLen = stringArray.length;
         const tensMap = numMap.get(2);
 
-        numMap.get(1).set(indexKey, stringArray[0]) //Adds single place valves
-        numMap.get(3).set(indexKey, stringArray[0].concat(hun)) //Adds hundred place values
+        numMap.get(1).set(indexKey, stringArray[0]); //Adds single place valves
+        numMap.get(3).set(indexKey, stringArray[0].concat(hun)); //Adds hundred place values
 
-    }
+        //Sets ten place for common/reusable single strings
+        if(arrayLen === 1) {
+            tensMap.set(indexKey, stringArray[0].concat(ty));
+        };
+
+        //Sets ten place for unique strings
+        if(arrayLen === 2) {
+            const subArray = stringArray[1];
+            const [subString, key, reuse] = subArray;
+
+            if(reuse) {
+                //Sets 13, 30 - 15, 50, strings
+
+                tensMap.get("unique").set(key, subString.concat(teen));
+                tensMap.set(indexKey, subString.concat(ty));
+            } else if (!reuse) {
+                //Sets single use unique strings
+
+                tensMap.get("unique").set(key, subString.concat(teen));
+            };
+
+            //Accounts for + sets 20 string
+            if(subArray.length > 3) {
+                tensMap.set(indexKey, subString.concat(ty));
+            };
+        };
+
+    };
 
     return numMap
-}
+};
 
 console.log(constructNumMap(smallValueStrings, placeValueStrings))
 
