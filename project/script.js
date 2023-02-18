@@ -159,6 +159,24 @@ const placeValueStrings = {
     },
 };
 
+//Construct and retruns fully constructed map containing strings
+function constructNumMap(smallStrings, placeStrings) {
+    const [teen, ty, hun] = placeStrings.small;
+
+    const numMap = new Map();
+
+    //Create 4 submaps within numMap
+    for(let i = 0; i < 3; i++){
+        const key = i + 1;
+        numMap.set(key, new Map());
+
+        //Create submap "unique" within tens map
+        if(key === 2) {
+            numMap.get(key).set("unique", new Map());
+        };
+    };
+}
+
 // Contains strings used to construct output - Organized by place values
 const stringsMap = new Map([
     //Single Values
