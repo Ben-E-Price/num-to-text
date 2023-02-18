@@ -133,9 +133,30 @@ const uiElements = {
     },
 };
 
-const placeValues = {
-    single: [`one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `nine`,],
-    tens: [`teen`, `twen`, `thir`, `four`, `fife`, `six`, `seven`, `eigh`, `nine`,],
+//Contains all unique strings required to construct single(ones) + unique tens place value strings
+const smallValueStrings = [
+    ["", ["ten", 10, false]],
+    ["one", ["eleven", 11, false]],
+    ["two", ["twelve", 12, false, "twen"]],
+    ["three", ["thir", 13, true]],
+    ["four"],
+    ["five", ["fif", 15, true]],
+    ["six"],
+    ["seven"],
+    ["eight"],
+    ["nine"],
+];
+
+// Contains place value strings required to construct 00 - 000,000,000,000 
+const placeValueStrings = {
+    //Tens - hundreds place values
+    small: ["teen", "ty", "hundred"],
+
+    //Thousands - Billions place values
+    large: {
+        values: [["thousand", false], ["illion", true]],
+        uniqueLetters: ["m", "b"],
+    },
 };
 
 // Contains strings used to construct output - Organized by place values
