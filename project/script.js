@@ -6,6 +6,7 @@ const uiElements = {
     elBtnSub: document.getElementById("btn-convert"),
     elOutDis: document.getElementById("wrapper-display"),
 
+    charLimit: 0,
     //Removes text from UI
     removeTextElements: function() {
         const childList = this.elOutDis.childElementCount > 0 ? [...this.elOutDis.children] : false
@@ -86,7 +87,7 @@ const uiElements = {
             };
 
             //Prevent event if char is illegal
-            if(!checkLegal() || !limitChars(9)){
+            if(!checkLegal() || !limitChars(uiElements.charLimit)){
                 preventEvent();
                 return false
             };
@@ -231,7 +232,9 @@ function constructNumMap(smallStrings, placeStrings) {
         };
     };
 
-    
+    //Sets input charLimit based on number of place positions
+    uiElements.charLimit = (placeMap.size + 1) * 3;
+
     return numMap
 };
 
