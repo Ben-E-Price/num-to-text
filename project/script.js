@@ -156,7 +156,7 @@ const placeValueStrings = {
     //Thousands - Billions place values
     large: {
         values: [["thousand", false], ["illion", true]],
-        uniqueLetters: ["m", "b"],
+        uniqueLetters: ["m"],
     },
 };
 
@@ -238,46 +238,9 @@ function constructNumMap(smallStrings, placeStrings) {
     return numMap
 };
 
-console.log(constructNumMap(smallValueStrings, placeValueStrings))
-
 // Contains strings used to construct output - Organized by place values
-// const stringsMap = new Map([
-//     //Single Values
-//     [0, new Map (constructMap(placeValues.single))],
-
-//     // Tens values 
-//     [1, new Map([
-//         ...constructMap(placeValues.tens, "ty"),
-
-//         // Contains values that can not be constructed from other strings
-//         [`unique`, new Map([
-//             [10, `ten`],
-//             [11, `eleven`],
-//             [12, `twelve`],
-//             [13, `thirteen`],
-//             [15, `fifteen`],
-//         ])],
-//     ])],
-
-//     [2, new Map(constructMap(placeValues.single, ` hundred and`))],
-
-//     [3, new Map([
-//         [0, `thousand`],
-//         [1, `million`],
-//     ])]
-// ]);
-
-// Constructs mapObject from passed array propValues 
-function constructMap(propValues, commonString = "") {
-    const outMap = new Map();
-    
-    for(let [i, value] of propValues.entries()){
-        value = commonString.length === 0 ? value: value.concat(commonString); 
-        outMap.set(i + 1, value);
-    };
-    
-    return outMap;
-};
+const stringsMap = constructNumMap(smallValueStrings, placeValueStrings);
+console.log(stringsMap)
 
 // Gets user inputted number - Returns number represented as text
 function numToText() {
