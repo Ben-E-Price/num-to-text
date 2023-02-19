@@ -169,22 +169,22 @@ function constructNumMap(smallStrings, placeStrings) {
 
     //Create 4 submaps within numMap
     for(let i = 0; i < 4; i++){
-        const key = i + 1;
-        numMap.set(key, new Map());
+        // const key = i + 1;
+        numMap.set(i, new Map());
 
         //Creates submap "unique" within tens map
-        if(key === 2) {
-            numMap.get(key).set("unique", new Map());
+        if(i === 1) {
+            numMap.get(i).set("unique", new Map());
         };
     };
 
     //Add smallStrings values into numMap - Adds single, tens, hundreds place values
     for(const [indexKey, stringArray] of smallStrings.entries()){
         const arrayLen = stringArray.length;
-        const tensMap = numMap.get(2);
+        const tensMap = numMap.get(1);
 
-        numMap.get(1).set(indexKey, stringArray[0]); //Adds single place valves
-        numMap.get(3).set(indexKey, stringArray[0].concat(hun)); //Adds hundred place values
+        numMap.get(0).set(indexKey, stringArray[0]); //Adds single place valves
+        numMap.get(2).set(indexKey, stringArray[0].concat(hun)); //Adds hundred place values
 
         //Sets ten place for single re-useable strings
         if(arrayLen === 1) {
@@ -216,9 +216,9 @@ function constructNumMap(smallStrings, placeStrings) {
     };
 
     //Adds strings for large place values, thousands > 
-    const placeMap = numMap.get(4);
+    const placeMap = numMap.get(3);
     for(const [placeString, reuse] of placeValues) {
-        let key = placeMap.size + 1;
+        let key = placeMap.size;
 
         if(reuse){
             //Adds + constructs place values strings from letters
@@ -267,6 +267,7 @@ function numToText() {
         function findString(mapKey, charNum, isUnique) {
             mapKey = Number(mapKey);
             charNum = Number(charNum);
+
             const outString = stringsMap.get(mapKey).get(charNum);
 
             //Returns strings for unique numbers
