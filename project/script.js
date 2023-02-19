@@ -166,6 +166,18 @@ function constructNumMap(smallStrings, placeStrings) {
     const [teen, ty, hun] = placeStrings.small;
     const {values: placeValues, uniqueLetters: placeLetters} = placeStrings.large
 
+    // Set values within submaps of passed map
+    function setSubMap(inMap, subKeys, setParameters) {
+        let currentMap = inMap;
+        const [setKey, setValue] = setParameters;
+
+        for(const getKey of subKeys) {
+            currentMap = currentMap.get(getKey);
+        };
+
+        currentMap.set(setKey, setValue);
+    };
+
     const numMap = new Map();
 
     //Create 4 submaps within numMap
@@ -239,7 +251,6 @@ function constructNumMap(smallStrings, placeStrings) {
 
 // Contains strings used to construct output - Organized by place values
 const stringsMap = constructNumMap(smallValueStrings, placeValueStrings);
-console.log(stringsMap)
 
 // Gets user inputted number - Returns number represented as text
 function numToText() {
