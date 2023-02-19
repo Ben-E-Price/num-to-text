@@ -7,6 +7,7 @@ const uiElements = {
     elOutDis: document.getElementById("wrapper-display"),
 
     charLimit: 0,
+
     //Removes text from UI
     removeTextElements: function() {
         const childList = this.elOutDis.childElementCount > 0 ? [...this.elOutDis.children] : false
@@ -181,14 +182,15 @@ function constructNumMap(smallStrings, placeStrings) {
     //Add smallStrings values into numMap - Adds single, tens, hundreds place values
     for(const [indexKey, stringArray] of smallStrings.entries()){
         const arrayLen = stringArray.length;
+        const [sinValString] = stringArray;
         const tensMap = numMap.get(1);
-
-        numMap.get(0).set(indexKey, stringArray[0]); //Adds single place valves
-        numMap.get(2).set(indexKey, stringArray[0].concat(hun)); //Adds hundred place values
+        
+        numMap.get(0).set(indexKey, sinValString); //Adds single place valves
+        numMap.get(2).set(indexKey, sinValString.concat(hun).concat(" and")); //Adds hundred place values
 
         //Sets ten place for single re-useable strings
         if(arrayLen === 1) {
-            tensMap.set(indexKey, stringArray[0].concat(ty));
+            tensMap.set(indexKey, sinValString.concat(ty));
         };
 
         //Sets ten place for mutiple/unique strings
@@ -210,9 +212,6 @@ function constructNumMap(smallStrings, placeStrings) {
                 tensMap.set(indexKey, subArray[3].concat(ty));
             };
         };
-
-
-
     };
 
     //Adds strings for large place values, thousands > 
